@@ -155,9 +155,11 @@
         //if ([dev.peripheral isEqual:peripheral])
         {
             dev.peripheral = peripheral;
-            if ([((NSObject*)_delegate) respondsToSelector:@selector(didDiscoverDevice:)])
+            DFBlunoDevice* blunoDev = [self.dicBlunoDevices objectForKey:key];
+            blunoDev.identifier = key;
+            blunoDev.name = peripheral.name;
+            if ([_delegate respondsToSelector:@selector(didDiscoverDevice:)])
             {
-                DFBlunoDevice* blunoDev = [self.dicBlunoDevices objectForKey:key];
                 [_delegate didDiscoverDevice:blunoDev];
             }
         }
